@@ -1,0 +1,12 @@
+import cv2
+import numpy as np
+
+city = cv2.imread("Resources/person_picture:002.png")
+print(city.shape)
+city_resize = cv2.resize(city,(512,512))
+
+#line
+cv2.line(city_resize,(0,0),(150,200),(0,255,0),3)       #line그려줌, (0,0)에서 (150,200)까지 그려주고 BGR값은 (0,255,0)이됨, channel-3
+cv2.imshow("Image",city_resize)
+
+cv2.waitKey(0)
