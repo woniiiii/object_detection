@@ -1,0 +1,20 @@
+#resize the image
+
+import cv2
+import numpy as np
+
+img=cv2.imread("Resources/person_picture:002.png")
+print(img.shape)        #find image size(height, width, channel:BGR)
+
+imgResize = cv2.resize(img,(300,200))   #image resize, width:300, height:200로 지정
+print(imgResize.shape)      #imgResize shape (200, 300, 3)=(height, width, channel)
+
+#crop the image
+imgCropped = img[0:200,200:500]        #height comes first, then next width
+                                    #height:0-200, width:200-500(end)으로 crop
+print(imgCropped.shape)
+
+cv2.imshow("city", img)
+cv2.imshow("resize_city", imgResize)
+cv2.imshow("crop_city", imgCropped)
+cv2.waitKey(0)
