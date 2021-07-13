@@ -1,0 +1,40 @@
+import cv2
+import numpy as np
+
+img = cv2.imread("Resources/person_picture:003.png")
+kernel = np.ones((5,5),np.uint8)       #numpy library사용하여 5*5행렬, 데이터 형태: 부호없는(unsigned integer) 8bit(1byte)
+
+#gray image
+imgGray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+
+#blur image
+imgBlur1 = cv2.GaussianBlur(imgGray,(7,7),0)        #ksize: bluring kernel size
+imgBlur2 = cv2.GaussianBlur(imgGray,(7,7),10)       #sigmaX: x축 방향으로 gaussian kernel 표준편차
+imgBlur3 = cv2.GaussianBlur(imgGray,(5,5),0)        #sigmay: y축 방향으로 gaussian kernel 표전편자
+imgBlur4 = cv2.GaussianBlur(imgGray,(3,3),10)
+
+#detect edge-canny
+imgCanny = cv2.Canny(img,1,1)                   #threshold(100,100)
+imgCanny2 = cv2.Canny(img,100,100)              #threshold(1,1)이면 사각형이 작아짐
+
+#thickness iamges
+imgDialation = cv2.dilate(imgCanny2,kernel,iterations=1)        #iteration=0이면 canny이미지와 동
+imgDialation2 = cv2.dilate(imgCanny2,kernel,iterations=5)       #iterations 증가하면 두께가 더 두꺼워짐
+
+#make it thinner
+imgEroded = cv2.erode(imgDialation,kernel,iterations=1)
+imgEroded2 = cv2.erode(imgDialation,kernel,iterations=5)
+
+
+cv2.imshow("gray image", imgGray)
+cv2.imshow("blur image1", imgBlur1)
+cv2.imshow("blur image2", imgBlur2)
+cv2.imshow("blur image3", imgBlur3)
+cv2.imshow("blur image4", imgBlur4)
+cv2.imshow("canny image", imgCanny)
+cv2.imshow("canny image2", imgCanny2)
+cv2.imshow("Dialation image", imgDialation)     #dialate하면 흰색이 더 많아짐
+cv2.imshow("Dialation image2", imgDialation2)
+cv2.imshow("Eroded image", imgEroded)           #eroded 하면 검은색이 더 많아짐
+cv2.imshow("Eroded image2", imgEroded2)
+cv2.waitKey(0)
