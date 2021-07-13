@@ -3,6 +3,8 @@ import cv2
 cap=cv2.VideoCapture(0)     #webcam하나면 0, 두개면1, 갯수에 따라서 달라짐
 cap.set(3,640)              #비디오 프레임의 폭(3)설정
 cap.set(4,480)              #비디오 프레임의 높이(4)설정
+cap.set(10,100)             #brightness(10)설정
+
 while True:
     success, img = cap.read()
     cv2.imshow("Video",img)
