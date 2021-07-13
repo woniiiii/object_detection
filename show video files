@@ -1,0 +1,9 @@
+import cv2
+
+cv2.VideoCapture("Resources/IMG_0773.MOV")    #파일을 직접 불러와서 비디오 읽기
+
+while True:               #특정키를 누를 때까지 무한 반복
+  success, img = cap.read()     #프레임별로 캡쳐
+  cv2.imshow("Video",img)       #img=camp.read()인데 비디오창을 Video이름으로 열음.
+    if cv2.waitKey(1) & 0xFF ==ord('q'):    #frame을 1ms로 실행하고 q를 누르면 창이 닫힘
+        break
