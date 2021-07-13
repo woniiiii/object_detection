@@ -1,0 +1,24 @@
+import cv2
+import numpy as np
+
+img = np.zeros((512,512,3),np.uint8)       #512*512 0으로만 구성된 matrix, channel3=RGB를 의미함
+print(img.shape)            #zero로만 채워져서 검은색으로 나타남
+#print(img)
+#img[100:200,:50]=255,0,0      #BGR이므로 blue image, img[:]의미: image의 모든부분을 색 바꿈
+
+#line
+#cv2.line(img,(0,0),(150,200),(0,255,0),3)       #line그려줌, (0,0)에서 (150,200)까지 그려주고 BGR값은 (0,255,0)이됨, 두께-3
+cv2.line(img,(0,0),(img.shape[1],img.shape[0]),(0,255,0))    #img.shape[1]:width-1은 너비, img.shape[0]:height-0은 높이
+
+#rectangular
+cv2.rectangle(img, (0,0),(250,350),(0,0,255),2)     #thickness:2,
+#cv2.rectangle(img, (0,0),(250,350),(0,0,255),cv2.FILLED)   내부에 색깔이 채워진 사각형 나옴
+
+#circle
+cv2.circle(img,(400,50),30,(255,255,0),5)       #center point: (400,50), radius:30, light blue color, thickness:5
+
+#how to put text in the image
+cv2.putText(img," OPENCV ",(300,200),cv2.FONT_HERSHEY_SIMPLEX,1,(0,150,150),3)      #image,넣고 싶은 문구, 시작점, font(cv2 library), font size, color, thickness
+
+cv2.imshow("Image",img)
+cv2.waitKey(0)
